@@ -8,6 +8,9 @@ module.exports = {
       colors: {
         'dark-orange': '#FF6A00', // Define your dark orange color here
       },
+      fontFamily: {
+        sans: ['Quicksand', 'sans-serif'],
+      },
     },
   },
   plugins: [],

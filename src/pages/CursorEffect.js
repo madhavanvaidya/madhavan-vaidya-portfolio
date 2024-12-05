@@ -2,39 +2,59 @@ import { useEffect } from "react";
 
 const CursorEffect = () => {
   useEffect(() => {
-    const cursor = document.querySelector(".cursor");
-    const homeSection = document.getElementById("home");
-
     const handleMouseMove = (e) => {
       const { clientX: mouseX, clientY: mouseY } = e;
-      cursor.style.left = `${mouseX - cursor.offsetWidth / 2}px`;
-      cursor.style.top = `${mouseY - cursor.offsetHeight / 2}px`;
+
+      // Create an electrifying trail
+      const trail = document.createElement('div');
+      trail.classList.add('cursor-trail');
+      document.body.appendChild(trail);
+      trail.style.left = `${mouseX - trail.offsetWidth / 2}px`;
+      trail.style.top = `${mouseY - trail.offsetHeight / 2}px`;
+
+      // Fade out the trail after animation
+      setTimeout(() => {
+        trail.remove();
+      }, 800); // Remove after 800ms
     };
 
-    const handleMouseEnter = () => {
-      cursor.classList.add("cursor-home");
-    };
-
-    const handleMouseLeave = () => {
-      cursor.classList.remove("cursor-home");
-    };
-
-    if (homeSection) {
-      homeSection.addEventListener("mousemove", handleMouseMove);
-      homeSection.addEventListener("mouseenter", handleMouseEnter);
-      homeSection.addEventListener("mouseleave", handleMouseLeave);
-    }
+    document.addEventListener("mousemove", handleMouseMove);
 
     return () => {
-      if (homeSection) {
-        homeSection.removeEventListener("mousemove", handleMouseMove);
-        homeSection.removeEventListener("mouseenter", handleMouseEnter);
-        homeSection.removeEventListener("mouseleave", handleMouseLeave);
-      }
+      document.removeEventListener("mousemove", handleMouseMove);
     };
   }, []);
 
-  return <div className="cursor absolute w-12 h-12 rounded-full bg-orange-600 pointer-events-none transition-all"></div>;
+  return (
+    <>
+      {/* CSS Styles */}
+      <style>
+        {`
+          .cursor-trail {
+            position: absolute;
+            width: 15px;
+            height: 15px;
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 50%;
+            pointer-events: none;
+            box-shadow: 0 0 20px 3px rgba(255, 105, 180, 0.8), 0 0 40px 6px rgba(255, 223, 0, 0.6);
+            animation: electrify 0.8s ease-out forwards;
+          }
+
+          @keyframes electrify {
+            0% {
+              transform: scale(1);
+              opacity: 1;
+            }
+            100% {
+              transform: scale(0);
+              opacity: 0;
+            }
+          }
+        `}
+      </style>
+    </>
+  );
 };
 
 export default CursorEffect;
