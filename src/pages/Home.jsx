@@ -7,6 +7,7 @@ import agricultureImage from "../pages/img/agriculture.webp";
 function App() {
   const [isSticky, setIsSticky] = useState(false);
   const [activeSection, setActiveSection] = useState("#home");
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const aboutRef = useRef(null);
 
   useEffect(() => {
@@ -69,22 +70,66 @@ function App() {
           }`}
         >
           <nav className="px-16 mx-auto flex justify-between items-center">
+            {/* Logo */}
             <a
               href="#home"
+              onClick={(e) => {
+                e.preventDefault();
+                document.querySelector("#home").scrollIntoView({
+                  behavior: "smooth",
+                });
+              }}
               className="font-extrabold text-2xl text-dark-orange"
             >
               Madhavan Vaidya
             </a>
-            <ul className="flex space-x-8 text-lg font-semibold">
+
+            {/* Hamburger Menu Button */}
+            <button
+              className="sm:hidden text-white focus:outline-none"
+              onClick={() => setIsMenuOpen(!isMenuOpen)}
+            >
+              <svg
+                className="w-6 h-6"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d={
+                    isMenuOpen
+                      ? "M6 18L18 6M6 6l12 12"
+                      : "M4 6h16M4 12h16M4 18h16"
+                  }
+                />
+              </svg>
+            </button>
+
+            {/* Navigation Links */}
+            <ul
+              className={`sm:flex sm:space-x-8 text-lg font-semibold ${
+                isMenuOpen ? "block" : "hidden"
+              } sm:block absolute sm:relative top-16 left-0 sm:top-auto sm:left-auto w-full sm:w-auto bg-gray-800 sm:bg-transparent px-8 sm:px-0 text-right sm:text-left`}
+            >
               {[
                 { href: "#about", label: "About" },
                 { href: "#projects", label: "Projects" },
                 { href: "#contact", label: "Contact" },
               ].map((item) => (
-                <li key={item.href}>
+                <li key={item.href} className="py-2 sm:py-0">
                   <a
                     href={item.href}
-                    className={`${
+                    onClick={(e) => {
+                      e.preventDefault();
+                      document.querySelector(item.href).scrollIntoView({
+                        behavior: "smooth",
+                      });
+                    }}
+                    className={`block ${
                       activeSection === item.href
                         ? "text-dark-orange"
                         : "text-white"
@@ -267,7 +312,7 @@ function App() {
                 className="w-full rounded-lg"
               />
             </div>
-            <div className="w-full md:w-1/2 text-left pl-6">
+            <div className="w-full md:w-1/2 text-left pl-6 py-8">
               <h3 className="text-3xl font-bold text-white mb-3">
                 Portal<span className="text-dark-orange">X</span>
               </h3>
@@ -302,7 +347,7 @@ function App() {
                 className="w-full rounded-lg"
               />
             </div>
-            <div className="w-full md:w-1/2 text-left pl-6">
+            <div className="w-full md:w-1/2 text-left pl-6 py-8">
               <h3 className="text-3xl font-bold text-white mb-3">
                 ADH<span className="text-dark-orange">She</span>
               </h3>
@@ -339,7 +384,7 @@ function App() {
                 className="w-full rounded-lg"
               />
             </div>
-            <div className="w-full md:w-1/2 text-left pl-6">
+            <div className="w-full md:w-1/2 text-left pl-6 py-8">
               <h3 className="text-3xl font-bold text-white mb-3">
                 Eco<span className="text-dark-orange">Hire</span>
               </h3>
@@ -375,7 +420,7 @@ function App() {
                 className="w-full rounded-lg"
               />
             </div>
-            <div className="w-full md:w-1/2 text-left pl-6">
+            <div className="w-full md:w-1/2 text-left pl-6 py-8">
               <h3 className="text-3xl font-bold text-white mb-3">
                 Crop Yield <span className="text-dark-orange">Prediction</span>
               </h3>
