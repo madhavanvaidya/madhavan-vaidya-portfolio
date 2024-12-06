@@ -85,14 +85,14 @@ function App() {
                   behavior: "smooth",
                 });
               }}
-              className="font-extrabold text-2xl text-dark-orange"
+              className="hidden sm:block font-extrabold text-2xl text-dark-orange"
             >
               Madhavan Vaidya
             </a>
 
             {/* Hamburger Menu Button */}
             <button
-              className="sm:hidden text-white focus:outline-none"
+              className="sm:hidden text-white focus:outline-none justify-end ml-auto"
               onClick={() => setIsMenuOpen(!isMenuOpen)}
             >
               <svg
@@ -117,11 +117,12 @@ function App() {
 
             {/* Navigation Links */}
             <ul
-              className={`sm:flex sm:space-x-8 text-lg font-semibold ${
+              className={`sm:flex sm:space-x-8 text-lg font-semibold my-2 ${
                 isMenuOpen ? "block" : "hidden"
-              } sm:block absolute sm:relative top-16 left-0 sm:top-auto sm:left-auto w-full sm:w-auto bg-gray-800 sm:bg-transparent px-8 sm:px-0 text-right sm:text-left`}
+              } sm:block absolute sm:relative top-20 left-0 sm:top-auto sm:left-auto w-full sm:w-auto bg-gray-800 sm:bg-transparent px-8 sm:px-0 text-right sm:text-left bg-opacity-75`}
             >
               {[
+                { href: "#home", label: "Home" },
                 { href: "#about", label: "About" },
                 { href: "#projects", label: "Projects" },
                 { href: "#contact", label: "Contact" },
