@@ -56,6 +56,12 @@ function App() {
               <a
                 href="#projects"
                 className="px-8 py-3 bg-orange-600 rounded-full hover:bg-pink-600 transition duration-300"
+                onClick={(e) => {
+                  e.preventDefault();
+                  document.querySelector("#projects").scrollIntoView({
+                    behavior: "smooth",
+                  });
+                }}
               >
                 View Projects
               </a>
